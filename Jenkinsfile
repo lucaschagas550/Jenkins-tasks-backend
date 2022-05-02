@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage{
+        stage('Just test'){
             steps{
                 bat 'echo deu certo'
             }   
