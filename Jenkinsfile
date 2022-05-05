@@ -17,8 +17,10 @@ pipeline{
         }
         stage('API Test'){
             steps{
-                git credentialsId: 'GitHub_Login', url: 'https://github.com/lucaschagas550/Jenkins-tasks-test'
-                bat 'mvn test'
+                dir('') {
+                    git credentialsId: 'GitHub_Login', url: 'https://github.com/lucaschagas550/Jenkins-tasks-test'
+                    bat 'mvn test'
+                }
             }
         }        
     }
