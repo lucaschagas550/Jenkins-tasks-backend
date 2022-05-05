@@ -22,6 +22,15 @@ pipeline{
                     bat 'mvn test'
                 }
             }
-        }        
+        } 
+        stage('Deploy FrontEnd'){
+            steps{
+                dir('frontEnd') {
+                    git credentialsId: 'GitHub_Login', url: 'https://github.com/lucaschagas550/jenkins-tasks-frontend'
+                    bat 'mvn clean package'
+                    deploy adapters: [tomcat8(credentialsId: 'TomCat_Login', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+                }   
+            }
+        }      
     }
 }
