@@ -31,6 +31,14 @@ pipeline{
                     deploy adapters: [tomcat8(credentialsId: 'TomCat_Login', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
                 }   
             }
+        } 
+        stage('Functional Test'){
+            steps{
+                dir('functional-test') {
+                    git credentialsId: 'GitHub_Login', url: 'https://github.com/lucaschagas550/Jenkins-tasks-functional'
+                    bat 'mvn test'
+                }
+            }
         }      
     }
 }
